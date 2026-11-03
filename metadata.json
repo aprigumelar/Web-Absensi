@@ -1,0 +1,11 @@
+{
+  "name": "Presensi Karyawan GPS & Wajah",
+  "description": "Aplikasi absensi kehadiran karyawan berbasis lokasi nyata (GPS/Geofencing) dengan verifikasi wajah kamera dan rekap laporan bulanan otomatis.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

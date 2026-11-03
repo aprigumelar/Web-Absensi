@@ -1,0 +1,129 @@
+{
+  "entities": {
+    "employee": {
+      "title": "Employee",
+      "description": "Employee profile with role and biometric credentials",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nik": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "employee"] },
+        "password": { "type": "string" },
+        "position": { "type": "string" },
+        "department": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "enrolledFaceUrl": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "shiftStartTime": { "type": "string" },
+        "shiftEndTime": { "type": "string" },
+        "shiftGraceMinutes": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "nik", "name", "role", "position", "department"]
+    },
+    "attendance": {
+      "title": "Attendance",
+      "description": "Daily employee attendance record with GPS coordinates, biometric photo proof, and late metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "employeeName": { "type": "string" },
+        "department": { "type": "string" },
+        "date": { "type": "string" },
+        "month": { "type": "string" },
+        "checkInTime": { "type": "string" },
+        "checkOutTime": { "type": "string" },
+        "checkInPhoto": { "type": "string" },
+        "checkOutPhoto": { "type": "string" },
+        "checkInLatitude": { "type": "number" },
+        "checkInLongitude": { "type": "number" },
+        "checkInDistanceMeters": { "type": "number" },
+        "checkOutLatitude": { "type": "number" },
+        "checkOutLongitude": { "type": "number" },
+        "checkOutDistanceMeters": { "type": "number" },
+        "checkInLocationName": { "type": "string" },
+        "checkOutLocationName": { "type": "string" },
+        "status": { "type": "string" },
+        "lateMinutes": { "type": "number" },
+        "earlyMinutes": { "type": "number" },
+        "workHours": { "type": "number" },
+        "faceMatchScore": { "type": "number" },
+        "notes": { "type": "string" },
+        "verifiedBy": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "employeeId", "employeeName", "date", "month", "status"]
+    },
+    "office": {
+      "title": "Office",
+      "description": "Registered company office geofence location managed by admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "radiusMeters": { "type": "number" },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "latitude", "longitude", "radiusMeters"]
+    },
+    "shift": {
+      "title": "Shift Schedule",
+      "description": "Work shift schedule configuration with grace period rules",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "graceMinutes": { "type": "number" },
+        "description": { "type": "string" },
+        "isDefault": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "startTime", "endTime", "graceMinutes"]
+    },
+    "department": {
+      "title": "Department",
+      "description": "Company organizational division or department",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "color": { "type": "string" },
+        "managerName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    }
+  },
+  "firestore": {
+    "/employees/{employeeId}": {
+      "schema": "#/entities/employee",
+      "description": "Collection of company employees and admins"
+    },
+    "/attendances/{attendanceId}": {
+      "schema": "#/entities/attendance",
+      "description": "Monthly attendance history records"
+    },
+    "/offices/{officeId}": {
+      "schema": "#/entities/office",
+      "description": "Office geofencing target locations"
+    },
+    "/shifts/{shiftId}": {
+      "schema": "#/entities/shift",
+      "description": "Master work shifts and grace period rules"
+    },
+    "/departments/{departmentId}": {
+      "schema": "#/entities/department",
+      "description": "Company departments and divisions"
+    }
+  }
+}
