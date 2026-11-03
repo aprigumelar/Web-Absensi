@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+html {
+	overflow-x: hidden;
+}
+
+body {
+	min-width: 0;
+	overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+	touch-action: manipulation;
+}
